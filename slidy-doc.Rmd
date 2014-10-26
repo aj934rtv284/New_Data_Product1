@@ -9,6 +9,14 @@ output: slidy_presentation
 
 
       - This Application Supports Graphing Mtcars Data
+      
+
+```{r}
+
+data(mtcars)
+str(mtcars)
+
+```
 
 
 ## Shiny Application Graphs
@@ -23,11 +31,28 @@ output: slidy_presentation
 
       - Choose Graph Variable from the Dropdown Menu.
       - Choose Graph Color using the Radio Buttons.
+      
+      
+```{r}
+
+
+hist(mtcars$mpg)
+
+```
+          
 
 ## Boxplot
 
 
       - Choose Graph Variable from the Dropdown Menu.
-      - Use the Dsiplay Outliers Checkbox to modify graph.
+      - Use the Display Outliers Checkbox to modify graph.
+      
+      
+```{r}
 
+
+boxplot(mtcars$qsec)
+
+```
+    
 
