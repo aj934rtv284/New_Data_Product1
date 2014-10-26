@@ -1,29 +1,56 @@
 library(shiny)
-library(ggplot2)
 
-dataset <- diamonds
 
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(
   
-  headerPanel("Diamonds Explorer"),
+
+  titlePanel("Motorcars Data"),
   
-  sidebarPanel(
+
+  sidebarLayout(
+    sidebarPanel(
+      
+      helpText("Create Histogram for Mtcars variables."),     
+      
+      radioButtons("graf", "Graph Color:",
+                   c("blue" = "blue",
+                     "red" = "red",
+                     "green" = "green"                    
+                     )),
+      
+      
+      selectInput("var", 
+                  label = "Choose variable for Histogram:",
+                  choices = c("miles per gallon" = "mpg",
+                  "horse power" = "hp",
+                  "weight" = "wt",
+                  "quarter mile" = "qsec"),
+                  selected = "mpg"),
+
     
-    sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset),
-                value=min(1000, nrow(dataset)), step=500, round=0),
     
-    selectInput('x', 'X', names(dataset)),
-    selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
-    selectInput('color', 'Color', c('None', names(dataset))),
+    br(),br(),br(),
+    selectInput("var2", 
+                label = "Choose variable for Boxplot:",
+                choices = c("miles per gallon" = "mpg",
+                "horse power" = "hp",
+                "weight" = "wt",
+                "quarter mile" = "qsec"),
+                selected = "mpg"),
     
-    checkboxInput('jitter', 'Jitter'),
-    checkboxInput('smooth', 'Smooth'),
     
-    selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
-    selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
-  ),
+    checkboxInput("checkbox1",
+                  label = "Display Outliers",
+                  value = FALSE)
+    
+  ),    
+    
+
+    mainPanel(
+      plotOutput("Plot")
+    )
   
-  mainPanel(
-    plotOutput('plot')
   )
+  
 ))
+

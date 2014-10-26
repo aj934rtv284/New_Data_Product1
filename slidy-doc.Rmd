@@ -1,0 +1,33 @@
+---
+title: "Motorcars Data Shiny Applications"
+date: "Sunday, October 26, 2014"
+output: slidy_presentation
+---
+
+
+## Introduction
+
+
+      - This Application Supports Graphing Mtcars Data
+
+
+## Shiny Application Graphs
+
+
+      - Create a Histogram of Mtcars Data.
+      - Create a Boxplot of Mtcars Data.
+
+
+## Histogram
+
+
+      - Choose Graph Variable from the Dropdown Menu.
+      - Choose Graph Color using the Radio Buttons.
+
+## Boxplot
+
+
+      - Choose Graph Variable from the Dropdown Menu.
+      - Use the Dsiplay Outliers Checkbox to modify graph.
+
+

@@ -1,30 +1,49 @@
 library(shiny)
-library(ggplot2)
+
 
 shinyServer(function(input, output) {
   
-  dataset <- reactive(function() {
-    diamonds[sample(nrow(diamonds), input$sampleSize),]
+
+  
+  col1 <- reactive({
+    graf <- switch(input$graf,
+                   red = "red",
+                   blue = "blue",                  
+                   green = "dark green",                  
+                   histogram)
+    
   })
   
-  output$plot <- reactivePlot(function() {
+  
+  output$Plot <- renderPlot({
     
-    p <- ggplot(dataset(), aes_string(x=input$x, y=input$y)) + geom_point()
+    par(mfrow=c(2,1),mar=c(2,2,2,2))
     
-    if (input$color != 'None')
-      p <- p + aes_string(color=input$color)
+    attach(mtcars)
     
-    facets <- paste(input$facet_row, '~', input$facet_col)
-    if (facets != '. ~ .')
-      p <- p + facet_grid(facets)
+    x <- mtcars[,input$var] 
+    title1 <- 'Histogram with variable -'
+  
     
-    if (input$jitter)
-      p <- p + geom_jitter()
-    if (input$smooth)
-      p <- p + geom_smooth()
+    hist(x, main = paste(title1, input$var),
+                border = 'white',
+                xlab = '',
+                col = col1())
     
-    print(p)
+
+    z <- mtcars[,input$var2]
+    title2 <- 'Boxplot with variable -'     
     
-  }, height=700)
+    
+    boxplot(z, main = paste(title2, input$var2),
+            outline = input$checkbox1,
+            col = 'orange',
+            horizontal = TRUE)              
+    
+    
+  })
+    
   
 })
+
+
